@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'net/imap'
 require 'mail'
-require 'mms2r'
 require 'yaml'
 
 class MessageFinder
@@ -27,9 +26,7 @@ class MessageFinder
     uids.each do |uid|
       mdata = imap.fetch(uid, 'RFC822')[0].attr['RFC822']
       mail = Mail.read mdata
-      # mms   = MMS2R::Media.new tmail
-      mms = ""
-      emails << {:mdata => mdata, :mail => mail, :mms => mms, :uid => uid}
+      emails << {:mdata => mdata, :mail => mail, :uid => uid}
     end
 
     emails.each do |email|
@@ -40,9 +37,6 @@ class MessageFinder
     end
 
     imap.disconnect
-
-    # Delete tmp files used by mms2r
-    emails.map{|m| m[:mms].purge }
 
     # Just checks to see if there was at least one recent unread message
     return true unless times.blank?
