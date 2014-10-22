@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
 require "delayed_job_tracer/version"
 
@@ -10,11 +9,11 @@ Gem::Specification.new do |s|
   s.email       = ["kjohnston.ca@gmail.com"]
   s.homepage    = "https://github.com/kjohnston/delayed_job_tracer"
   s.summary     = %q{Like a tracer bullet for your delayed_job queue}
-  s.description = %q{Monitors the delayed_job queue and periodically tests its ability to deliver 
-                     e-mail messages and e-mails you if something goes wrong, such as the delayed_job 
+  s.description = %q{Monitors the delayed_job queue and periodically tests its ability to deliver
+                     e-mail messages and e-mails you if something goes wrong, such as the delayed_job
                      process crashes or one of its jobs fails or takes too long to complete.}
 
-  s.add_runtime_dependency('tmail', '1.2.7.1')
+  s.add_runtime_dependency('mail', '2.6.1')
   s.add_runtime_dependency('mms2r', '2.4.1')
   s.add_runtime_dependency('mysql2', '>= 0.2.6', '<= 0.4')
 
