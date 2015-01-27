@@ -25,7 +25,7 @@ class MessageFinder
 
     uids.each do |uid|
       mdata = imap.fetch(uid, 'RFC822')[0].attr['RFC822']
-      mail = Mail.read mdata
+      mail = Mail.new mdata
       emails << {:mdata => mdata, :mail => mail, :uid => uid}
     end
 
