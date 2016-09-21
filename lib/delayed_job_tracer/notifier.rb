@@ -19,7 +19,7 @@ class Notifier
     account   = c['alert']
     recipient = c['admin']['email']
     appname   = c['app']['name']
-    subject   = "[#{appname}] DelayedJobTracer: " + subject_suffix
+    subject   = "[#{appname}#{ENV['RAILS_ENV'] ?  '/' + ENV['RAILS_ENV']: ''}] DelayedJobTracer: " + subject_suffix
     message   = "#{appname} " + message_suffix
     system    "/usr/local/bin/sendEmail -f #{account['username']} -t #{recipient} -u '#{subject}' -m #{message} \
                 -s #{account['server']}:#{account['port']} -xu #{account['username']} -xp #{account['password']} \
