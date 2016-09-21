@@ -21,9 +21,10 @@ class Notifier
     appname   = c['app']['name']
     subject   = "[#{appname}#{ENV['RAILS_ENV'] ?  '/' + ENV['RAILS_ENV']: ''}] DelayedJobTracer: " + subject_suffix
     message   = "#{appname} " + message_suffix
-    system    "/usr/local/bin/sendEmail -f #{account['username']} -t #{recipient} -u '#{subject}' -m #{message} \
-                -s #{account['server']}:#{account['port']} -xu #{account['username']} -xp #{account['password']} \
-                #{ '-o tls=yes' if c['alert']['tls'] == 'true' }"
+    system      "echo '#{message}' | mail -s '#{subject}' #{recipient}"
+    # system    "/usr/local/bin/sendEmail -f #{account['username']} -t #{recipient} -u '#{subject}' -m #{message} \
+    #             -s #{account['server']}:#{account['port']} -xu #{account['username']} -xp #{account['password']} \
+    #             #{ '-o tls=yes' if c['alert']['tls'] == 'true' }"
   end
   
 end
