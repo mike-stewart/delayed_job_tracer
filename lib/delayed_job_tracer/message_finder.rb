@@ -39,7 +39,7 @@ class MessageFinder
     imap.disconnect
 
     # Just checks to see if there was at least one recent unread message
-    return true unless times.blank?
+    return true unless times.empty?
   end
 
 end
