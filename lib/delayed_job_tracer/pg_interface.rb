@@ -33,10 +33,7 @@ class PgInterface
 
   # SQL helper method for inserting a delayed_job record
   def self.delayed_job_handler
-    "--- !ruby/struct:Delayed::PerformableMailer
-object: !ruby/class DelayedJobTracerMailer
-method_name: :delayed_job_tracer_test_message
-args: []"
+    "--- !ruby/object:Delayed::PerformableMailer \nargs: []\n\nmethod_name: :delayed_job_tracer_test_message\nobject: !ruby/class DelayedJobTracerMailer\n"
   end
 
   # Timestamp in the format that e-mails expect
