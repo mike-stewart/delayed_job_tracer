@@ -15,6 +15,10 @@ optparse = OptionParser.new do |opts|
     options[:config] = file
   end
 
+  opts.on( '-d', '--database FILE', 'Path to database.yml' ) do |file|
+    options[:database] = file
+  end
+
   opts.on( '-h', '--help', 'Display this screen' ) do
     puts opts
     exit
@@ -32,8 +36,9 @@ begin
   raise "no config file provided" unless options[:config]
   raise "no config file found at '#{options[:config]}'" unless File.exists?(options[:config])
   config = YAML.load(ERB.new(File.read(options[:config])).result)
+  database_config = YAML.load(ERB.new(File.read(options[:database])).result) if File.exists?(options[:database])
   raise "incorrect config file: '#{options[:config]}'" unless config['app']
-  DelayedJobTracer.run(config)
+  DelayedJobTracer.run(config, database_config)
 rescue Exception => e
   puts "Error: #{e}"
 end

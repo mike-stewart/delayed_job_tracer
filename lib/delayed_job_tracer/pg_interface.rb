@@ -4,8 +4,8 @@ class PgInterface
 
   # Connects to the db and submits a query
   def self.query(sql)
-    c = DelayedJobTracer.config['database']
-    conn = PG.connect(:host => c['ip'], :dbname => c['database'], :user => c['user'], :password => c['password'], :sslmode => :require)
+    c = DelayedJobTracer.database_config[ENV['RAILS_ENV']]
+    conn = PG.connect(:host => c['host'], :dbname => c['database'], :user => c['username'], :password => c['password'], :sslmode => :require)
     conn.exec(sql)
   end
 
