@@ -3,6 +3,7 @@
 require 'delayed_job_tracer'
 require 'optparse'
 require 'yaml'
+require 'erb'
 
 options = {}
 
@@ -30,7 +31,7 @@ optparse.parse!
 begin
   raise "no config file provided" unless options[:config]
   raise "no config file found at '#{options[:config]}'" unless File.exists?(options[:config])
-  config = YAML.load_file(options[:config])
+  config = YAML.load(ERB.new(File.read(options[:config])).result)
   raise "incorrect config file: '#{options[:config]}'" unless config['app']
   DelayedJobTracer.run(config)
 rescue Exception => e
