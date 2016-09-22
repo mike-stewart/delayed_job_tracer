@@ -7,6 +7,7 @@ class PgInterface
     c = DelayedJobTracer.database_config[ENV['RAILS_ENV']]
     conn = PG.connect(:host => c['host'], :dbname => c['database'], :user => c['username'], :password => c['password'], :sslmode => :require)
     conn.exec(sql)
+    conn.finish
   end
 
   # Returns true if there are no stale records
