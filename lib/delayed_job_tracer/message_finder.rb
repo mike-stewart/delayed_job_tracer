@@ -13,12 +13,13 @@ class MessageFinder
     ssl      = c['ssl'] || false
     username = c['username']
     password = c['password']
-    folder   = c['folder']
+    folder   = c['folder'] || 'inbox'
+    subject  = c['subject']
 
     imap = Net::IMAP.new server, port, ssl
     imap.login username, password
     imap.select folder
-    uids = imap.search(["UNSEEN"])
+    uids = imap.search(["UNSEEN", 'SUBJECT', subject])
 
     emails = []
     times = []
