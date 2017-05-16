@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
                      process crashes or one of its jobs fails or takes too long to complete.}
 
   s.add_runtime_dependency('mail', '~> 2.5')
-  s.add_runtime_dependency('pg', '~> 0.16.0')
+  s.add_runtime_dependency('pg', '>=0.16.0')
   # s.add_runtime_dependency('mysql2', '>= 0.2.6', '<= 0.4')
 
   s.files              = `git ls-files`.split("\n")
